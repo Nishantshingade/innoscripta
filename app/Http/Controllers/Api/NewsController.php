@@ -199,17 +199,21 @@ class NewsController extends Controller
         $newsQuery = News::query();
         foreach ($preferences as $preference) {
             $newsQuery->Where('type', $preference->type);
-            foreach ($preference->sources as $source) {
-                $newsQuery->orWhere('source', 'like', '%' . $source->source . '%');
-            }
-        
-            foreach ($preference->categories as $category) {
-                $newsQuery->orWhere('category', 'like', '%' . $category->category . '%');
-            }
-        
-            foreach ($preference->authors as $author) {
-                $newsQuery->orWhere('author', 'like', '%' . $author->author . '%');
-            }
+            $newsQuery->where(function ($query) use ($preference) {
+                foreach ($preference->sources as $source) {
+                    $query->orWhere('source', 'like', '%' . $source->source . '%');
+                }
+            });
+            $newsQuery->where(function ($query) use ($preference) {
+                foreach ($preference->categories as $category) {
+                    $query->orWhere('category', 'like', '%' . $category->category . '%');
+                }
+            });
+            $newsQuery->where(function ($query) use ($preference) {
+                foreach ($preference->authors as $author) {
+                    $query->orWhere('author', 'like', '%' . $author->author . '%');
+                }
+            });
         }
         $filteredNews = $newsQuery->get();
         return response()->json($filteredNews);
