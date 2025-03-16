@@ -3,5 +3,5 @@
 Interview Assignment
 
 Screenshots
-![screenshot](login.png)
+![screenshot](https://github.com/Nishantshingade/innoscripta/blob/master/public/login.png)
 
