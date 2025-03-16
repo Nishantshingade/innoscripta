@@ -19,7 +19,7 @@ Route::post('/reset',[AuthController::class,'reset'])->middleware('throttle:5,1'
 Route::middleware(['auth:sanctum','throttle:5,1'])->group(function(){
     Route::post('/logout',[AuthController::class,'logout']);
     Route::post('/getArticles',[NewsController::class,'getArticles'])->name('getAll');
-    Route::get('/article/{article}',[NewsController::class,'fetchArticle']);
+    Route::get('/article/{id}',[NewsController::class,'fetchArticle']);
     Route::get('/articles/list',[NewsController::class,'list']);
     Route::post('/preference/set',[NewsController::class,'setpreference'])->name('setpreference');
     Route::get('/preference/get/{userId}',[NewsController::class,'getpreference'])->name('getpreference');
