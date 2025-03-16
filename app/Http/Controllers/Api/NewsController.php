@@ -476,7 +476,7 @@ class NewsController extends Controller
      *     }
      * )
      */
-    public function getpreference($userId){ 
+    public function getpreference($userId){
         $preferences = Preference::with(['sources', 'categories', 'authors'])
             ->where('user_id', $userId)
             ->get();
